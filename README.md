@@ -2,6 +2,8 @@
 
 The **Burmese Handwritten Digit Dataset (BHDD)** is a dataset project specifically created for recognizing handwritten Burmese digits. It serves as the Burmese counterpart to the renowned MNIST dataset and is designed to facilitate learning and benchmarking in Machine Learning (ML) and Deep Learning (DL).
 
+> **Note on naming:** The canonical name of this dataset is **BHDD** (Burmese Handwritten Digit Dataset). Some third-party publications may refer to this dataset by other names, but **BHDD** remains the official designation by its creators. Please use "BHDD" when citing or referencing this dataset.
+
 ![Sample Images](images/sample.png)
 
 ---
@@ -63,16 +65,29 @@ For contributions, please fork the repository, make your changes, and submit a p
 
 ## Citation
 
-If you use the BHDD dataset in your work, please cite this repository:
+If you use the BHDD dataset in your research, publications, or derivative work, you must cite the following:
 
-```
-@dataset{bhdd,
-  author = {Expa.AI Research Team},
-  title = {Burmese Handwritten Digit Dataset (BHDD)},
-  year = {2024},
-  url = {https://github.com/baseresearch/BHDD}
+```bibtex
+@dataset{bhdd2024,
+  author    = {Swan Htet Aung and Hein Htet and Htoo Say Wah Khaing and Thuya Myo Nyunt and {Expa.AI Research Team}},
+  title     = {{BHDD}: Burmese Handwritten Digit Dataset},
+  year      = {2024},
+  publisher = {GitHub},
+  url       = {https://github.com/baseresearch/BHDD},
+  note      = {Licensed under LGPL-3.0}
 }
 ```
+
+---
+
+## Core Contributors
+
+- **Swan Htet Aung** — Lead Researcher, Expa.AI
+- **Hein Htet** — Research Engineer, Expa.AI
+- **Htoo Say Wah Khaing** — Data Engineer, Expa.AI
+- **Thuya Myo Nyunt** — Technical Lead, Expa.AI
+
+And other members of the Expa.AI Research Team.
 
 ---
 
@@ -81,9 +96,9 @@ If you use the BHDD dataset in your work, please cite this repository:
 This dataset would not have been possible without:
 - The efforts of the Expa.AI Research Team.
 - Volunteers and interns from Taungoo Computer University who contributed handwriting samples.
-- Highschool students from St.Augustine / B.E.H.S (2) Kamayut
-- Friends and family members of Expa.AI Research Team.
-- The community’s ongoing support and interest in ML/DL for the Burmese language.
+- High school students from St. Augustine / B.E.H.S (2) Kamayut.
+- Friends and family members of the Expa.AI Research Team.
+- The community's ongoing support and interest in ML/DL for the Burmese language.
 
 ---
 
@@ -99,7 +114,7 @@ For questions, suggestions, or feedback, please reach out to our team by opening
 
 ---
 
-Let’s build the Burmese ML/DL ecosystem together!
+Let's build the Burmese ML/DL ecosystem together!
 
 ## Note about Git LFS
 If you clone this repository without installing Git LFS, you will only fetch the pointer file for the dataset.
