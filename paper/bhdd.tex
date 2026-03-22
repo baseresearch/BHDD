@@ -88,13 +88,21 @@ format.
 
 Kuzushiji-MNIST~\cite{clanuwat2018deep} took the same approach for
 cursive Japanese characters and found that the error patterns looked
-nothing like those on Latin digits. This made the broader point that
-writing systems with different visual structures need their own datasets.
-Analogous benchmarks have since been developed for other scripts,
-including Bengali~\cite{alam2018numtadb} and
-Arabic~\cite{elsawy2017arabic} handwritten digits.
+nothing like those on Latin digits---different scripts need their own
+benchmarks. Since then, handwritten digit datasets have appeared for
+Kannada~\cite{prabhu2019kannada}, Bengali~\cite{alam2018numtadb},
+Arabic~\cite{elsawy2017arabic}, and
+Persian~\cite{khosravi2007hoda}.
 
-No public benchmark for Myanmar handwritten digits existed before BHDD.
+Myanmar script recognition has been studied since at least 2005, when
+Sandar~\cite{sandar2005comparison} compared off-line handwriting and
+print recognition using hidden Markov models.
+Lwin and Wu~\cite{lwin2020myanmar} later used K-means clustering with a
+CNN to handle visual similarity among Myanmar's glyphs, and
+Aung et al.~\cite{aung2024myocr} released myOCR, an OCR pipeline
+for machine-printed Myanmar text. However, none of these efforts
+produced a publicly available benchmark for handwritten digits.
+BHDD is the first.
 
 % ------------------------------------------------------------------
 \section{Dataset}
@@ -104,14 +112,13 @@ No public benchmark for Myanmar handwritten digits existed before BHDD.
 
 We organized a community collection effort through the Expa.AI Research
 Team. Over 150 people wrote Burmese digits on plain A4 paper (both white
-and yellow sheets), each filling approximately ten pages (one per digit
-class). Contributors came from Taungoo Computer University
+and yellow sheets), each filling ten or more pages (one per digit
+class), with roughly 500--600 digits per page. In total, approximately
+2,500 sheets were collected. Contributors came from Taungoo Computer University
 (volunteers and interns), St.\ Augustine / B.E.H.S~(2) Kamayut (high
 school students), and friends and family of the research team. Ages
 ranged from teenagers to people in their 50s, with occupations including
-clerks, programmers, and students. This range of contributors
-produces natural variation in stroke thickness, pen pressure, and
-letter formation across the dataset. Fig.~\ref{fig:sheets} shows
+clerks, programmers, and students. Fig.~\ref{fig:sheets} shows
 representative collection sheets.
 
 \begin{figure}[!t]
@@ -123,20 +130,32 @@ representative collection sheets.
   \label{fig:sheets}
 \end{figure}
 
-The filled sheets were scanned or photographed. Because many
-contributors had low-quality phone cameras, we developed a mobile
-application that applied adaptive thresholding and contour detection
-in real time, letting users adjust parameters and retake photos until
-the extracted digits were clean. The preprocessing pipeline converted
-images to grayscale, binarized with adaptive thresholding, found
-contours to locate each digit, cropped to the bounding box, centered
-in a $28\times28$ frame, and normalized intensity. Quality assurance was a two-stage process: all 20 members of the
-annotation team independently inspected every training page, and two
-data engineers then performed a final verification pass over the
-complete dataset. Mislabeled, illegible, and duplicate images were
-removed at each stage. The training and test sets use different
-contributors so that models cannot rely on memorizing individual
-handwriting styles. Most contributors were based in Yangon, with
+The majority of sheets were photographed with phone cameras rather
+than scanned. Variable lighting, angles, and camera quality made
+automated digit extraction difficult, so we developed an Android
+application (Fig.~\ref{fig:sheets}, right) that applied adaptive
+thresholding and contour detection in real time, capturing per-photo
+preprocessing parameters as metadata. Contributors could adjust
+settings and retake photos until the extracted digits were clean.
+Because extraction yield from phone photos was low, the team collected
+substantially more sheets than the final dataset required.
+
+The extraction pipeline used OpenCV: convert to grayscale, binarize
+with adaptive thresholding (using the per-photo parameters captured by
+the app), find contours to locate each digit, crop to the bounding box,
+center in a $28\times28$ frame, and normalize pixel intensity.
+
+Quality assurance was a two-stage process: the 20-member annotation
+team inspected samples distributed via a chatbot-based review tool,
+and two data engineers then performed a final verification pass over
+the complete dataset. Mislabeled, illegible, and duplicate images were
+removed at each stage. All 87,561 images in the final dataset are
+verified unique: no exact duplicates exist within or across the
+training and test sets.
+
+Approximately 120 contributors were assigned to the training set and
+the remaining roughly 30 to the test set, so no writer's handwriting
+appears in both splits. Most contributors were based in Yangon, with
 smaller groups from Mandalay, Nay Pyi Taw, Shan State, and the
 United States.
 
@@ -240,13 +259,13 @@ very similar. We identified the worst pairs from our improved CNN's confusion
 matrix (Section~\ref{sec:error}) and show them in
 Fig.~\ref{fig:similar_pairs}.
 
-Digits~0 and~1 are the hardest pair: 24 misclassifications in both
-directions. The only difference is whether the circle is closed or has a
-small gap. Digits~0 and~8 share a round outer shape but differ
-inside (plain ring vs.\ spiral), with 8 errors both ways. Digit~3 gets
-mistaken for~1 seven times when its tail is faint and only the curved
-head shows. Digits~5 and~8 sometimes overlap because both have looped
-forms (3~errors).
+Digits~0 and~1 are the hardest pair: 24 misclassifications between
+them (in both directions combined). The only difference is whether the
+circle is closed or has a small gap. Digits~0 and~8 share a round outer
+shape but differ inside (plain ring vs.\ spiral), with 8 errors
+combined. Digit~3 gets mistaken for~1 seven times when its tail is faint
+and only the curved head shows. Digits~5 and~8 sometimes overlap because
+both have looped forms (3~errors).
 
 When digits share curved sub-strokes, small differences in pen pressure
 or whether someone fully closes a loop can shift a sample's appearance
@@ -288,7 +307,7 @@ annealing, and light weight decay.
 
 All three models exceed 99\% accuracy with standard training
 procedures (Table~\ref{tab:results}). The improved CNN reaches 99.83\%
-with a macro F1 of 0.998, cutting misclassifications roughly in half
+with a macro F1 of 0.998, cutting misclassifications by about a third
 compared to the baseline CNN while adding only 10K parameters.
 
 \begin{table}[!t]
@@ -314,7 +333,7 @@ The improved CNN's confusion matrix (Fig.~\ref{fig:confusion}) has
 nearly all off-diagonal entries at zero. Of 27,561 test samples, only
 47 are misclassified. The errors
 cluster around digits~0 and~1 (a closed versus open circle), which
-account for about a third of all mistakes, consistent with the
+account for about half of all mistakes, consistent with the
 structural similarity between these two classes.
 
 \begin{figure}[!t]
