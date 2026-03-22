@@ -74,7 +74,7 @@ If you use the BHDD dataset in your research, publications, or derivative work, 
   year      = {2024},
   publisher = {GitHub},
   url       = {https://github.com/baseresearch/BHDD},
-  note      = {Licensed under LGPL-3.0}
+  note      = {Dataset: CC BY-SA 4.0, Code: LGPL-3.0}
 }
 ```
 
@@ -104,7 +104,12 @@ This dataset would not have been possible without:
 
 ## License
 
-This dataset is released under the [LGPL-3.0 license](LICENSE). Please see the LICENSE file for more details.
+This project uses a dual license:
+
+- **Dataset** (images, labels, and data files): [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- **Code** (scripts, notebooks, and software): [LGPL-3.0](https://www.gnu.org/licenses/lgpl-3.0.html)
+
+See the [LICENSE](LICENSE) file for full details.
 
 ---
 
