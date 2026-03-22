@@ -17,9 +17,9 @@ The **Burmese Handwritten Digit Dataset (BHDD)** is a dataset project specifical
 
 **Data Format:**
 - **Train Image Shape:** `(60000, 784)`
-- **Train Label Shape:** `(60000, 10)`
+- **Train Label Shape:** `(60000,)`
 - **Test Image Shape:** `(27561, 784)`
-- **Test Label Shape:** `(27561, 10)`
+- **Test Label Shape:** `(27561,)`
 
 The dataset was collected from over 150 individuals of different ages (ranging from high school students to professionals in their 50s) and diverse occupations (including clerks, programmers, and others) to achieve a wide variety of handwriting styles. We then preprocessed to mirror the structure and functionality of MNIST.
 
@@ -29,9 +29,9 @@ The dataset was collected from over 150 individuals of different ages (ranging f
 
 The dataset consists of:
 1. **Train Images**: 60,000 grayscale images of handwritten Burmese digits, flattened into a 1D array of size 784 (28x28 pixels).
-2. **Train Labels**: One-hot encoded labels corresponding to the digit class.
+2. **Train Labels**: Integer labels (0--9) corresponding to the digit class.
 3. **Test Images**: 27,561 grayscale images for testing purposes.
-4. **Test Labels**: One-hot encoded labels for testing data.
+4. **Test Labels**: Integer labels (0--9) for testing data.
 
 ---
 
