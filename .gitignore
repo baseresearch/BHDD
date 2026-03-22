@@ -4,3 +4,12 @@ __pycache__
 .cache
 checkpoint
 .idea
+.venv
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
